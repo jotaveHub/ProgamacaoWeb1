@@ -1,16 +1,20 @@
 package br.edu.ifpb.demo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/alunos")
 public class AlunosController {
 
-    @GetMapping
-    public String listar(){
-        return "Lista de Alunos";
+    @GetMapping("/{matricula}")
+    public String listar(
+            @PathVariable String matricula,
+            @RequestParam(required = false) String curso
+    ) {
+        if (matricula.equals("123") && (curso == null || curso.equals("ADS"))) {
+            return "Aluno listado";
+        }
+        return "Aluno não encontrado";
     }
 
     @PostMapping
