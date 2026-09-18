@@ -1,4 +1,4 @@
-package br.edu.ifpb.demo;
+package br.edu.ifpb.demo.aluno;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 @RequestMapping("/alunos")
 public class AlunosController {
 
-    private ArrayList<Aluno> alunos;
-    public AlunosController() {
-        alunos = new ArrayList<>();
+    private final ArrayList<Aluno> alunos;
+    public AlunosController(ArrayList<Aluno> alunos) {
+        this.alunos  = alunos;
     }
 
     @GetMapping(path = "/{matricula}")
@@ -41,6 +41,6 @@ public class AlunosController {
         alunos.add(aluno);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(aluno);
+                .body(aluno); //
         }
     }
